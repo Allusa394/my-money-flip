@@ -171,10 +171,30 @@
             placeholder="Например: «Деньги достаются только тяжёлым трудом»&#10;или «Я не заслуживаю большого дохода»"></textarea>
         </div>
 
-        <!-- Field 02: Context -->
+        <!-- Field 02: Origin -->
         <div style="margin-bottom:24px">
           <div class="field-label">
             <span class="lnum">02</span>
+            Откуда это убеждение? Семья, опыт, событие?
+          </div>
+          <input type="text" id="origin" class="field-input"
+            placeholder="Например: мама говорила, что денег всегда не хватает...">
+        </div>
+
+        <!-- Field 03: Obstacle -->
+        <div style="margin-bottom:24px">
+          <div class="field-label">
+            <span class="lnum">03</span>
+            Что конкретно оно мешает тебе делать прямо сейчас?
+          </div>
+          <input type="text" id="obstacle" class="field-input"
+            placeholder="Например: не могу поднять цены на свои услуги...">
+        </div>
+
+        <!-- Field 04: Context -->
+        <div style="margin-bottom:24px">
+          <div class="field-label">
+            <span class="lnum">04</span>
             В какой сфере это мешает больше всего?
           </div>
           <div class="select-wrap">
@@ -188,11 +208,11 @@
           </div>
         </div>
 
-        <!-- Field 03: Intensity -->
+        <!-- Field 05: Intensity -->
         <div style="margin-bottom:32px">
           <div class="field-label" style="justify-content:space-between">
             <span style="display:flex;align-items:center;gap:8px">
-              <span class="lnum">03</span>
+              <span class="lnum">05</span>
               Насколько сильно это влияет на твою жизнь?
             </span>
             <span id="slider-val" class="font-syne font-bold"
@@ -292,6 +312,26 @@
         </div>
 
       </div><!-- /results-grid -->
+
+      <!-- Plan block -->
+      <div id="plan-block" style="display:none;margin-top:20px">
+        <div class="plan-card">
+          <div class="plan-header">
+            <span class="plan-icon">◈</span>
+            <div>
+              <div class="plan-tag">Твой план на 7 дней</div>
+              <div class="plan-subtag">Персональная практика под это убеждение</div>
+            </div>
+          </div>
+          <div class="plan-body" id="plan-body"></div>
+          <div class="plan-cta">
+            <p class="plan-cta-text">Полное сопровождение, глубокий разбор и практика каждый день — в Telegram-боте</p>
+            <a href="https://t.me/" class="btn-tg" target="_blank" rel="noopener">
+              ✈ Перейти в Telegram-бот
+            </a>
+          </div>
+        </div>
+      </div>
 
       <!-- Feedback block -->
       <div id="feedback-block" style="display:none;margin-top:20px">

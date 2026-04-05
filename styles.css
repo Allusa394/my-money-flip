@@ -579,6 +579,68 @@ input[type=range]::-moz-range-thumb {
   color: var(--gold); margin-bottom: 12px;
 }
 
+/* ── Plan card ──────────────────────────────────────────── */
+.plan-card {
+  background: rgba(184,255,0,0.04);
+  border: 1px solid var(--border-mid);
+  border-radius: 4px; padding: 24px;
+  position: relative; overflow: hidden;
+  animation: fadeInUp 0.4s ease;
+}
+.plan-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--energy);
+}
+.plan-header {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 18px;
+}
+.plan-icon {
+  font-size: 20px; color: var(--energy);
+  line-height: 1; flex-shrink: 0; margin-top: 2px;
+}
+.plan-tag {
+  font-size: 13px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--energy);
+  font-weight: 500;
+}
+.plan-subtag {
+  font-size: 11px; letter-spacing: 0.08em;
+  color: var(--text-mute); margin-top: 3px;
+}
+.plan-body {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 15px; line-height: 2;
+  color: var(--text-dim); white-space: pre-line;
+  margin-bottom: 22px;
+}
+.plan-cta {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 14px; text-align: center;
+}
+.plan-cta-text {
+  font-size: 14px; color: var(--text-dim);
+  line-height: 1.6; max-width: 380px;
+}
+.btn-tg {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px;
+  background: var(--energy); color: #030308;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border-radius: 3px; text-decoration: none;
+  transition: box-shadow 0.25s, transform 0.12s;
+  box-shadow: 0 0 24px rgba(184,255,0,0.35);
+}
+.btn-tg:hover {
+  box-shadow: 0 0 40px rgba(184,255,0,0.55);
+  transform: translateY(-1px);
+}
+
 /* ── Feedback card ──────────────────────────────────────── */
 .feedback-card {
   background: var(--bg-elevated);

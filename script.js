@@ -352,6 +352,7 @@ function resetForm() {
   document.getElementById('belief-echo').style.display = 'none';
   document.getElementById('archive-banner').style.display = 'none';
   document.getElementById('feedback-block').style.display = 'none';
+  document.getElementById('plan-block').style.display = 'none';
   document.getElementById('empty-state').style.display = '';
   document.getElementById('post-ctas').style.display = 'none';
   currentEntryId = null;
@@ -385,10 +386,12 @@ function copyCard(bodyId, btn) {
 
 /* ── Main transform ─────────────────────────────────────── */
 async function runTransform() {
-  const beliefEl  = document.getElementById('belief');
-  const contextEl = document.getElementById('context');
-  const belief    = beliefEl.value.trim();
-  const context   = contextEl.value;
+  const beliefEl   = document.getElementById('belief');
+  const contextEl  = document.getElementById('context');
+  const belief     = beliefEl.value.trim();
+  const context    = contextEl.value;
+  const origin     = (document.getElementById('origin')?.value   || '').trim();
+  const obstacle   = (document.getElementById('obstacle')?.value || '').trim();
   const btn       = document.getElementById('transform-btn');
 
   // Validation
@@ -425,12 +428,12 @@ async function runTransform() {
   document.getElementById('results-header').classList.add('visible');
 
   // Real API call
-  let masterText, battleText, codeText;
+  let masterText, battleText, codeText, planText;
   try {
     const response = await fetch('/api/transform', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ belief, context, intensity: slider.value }),
+      body: JSON.stringify({ belief, context, intensity: slider.value, origin, obstacle }),
     });
 
     if (!response.ok) throw new Error('API error');
@@ -438,13 +441,14 @@ async function runTransform() {
     masterText = data.master;
     battleText = data.battle;
     codeText   = data.code;
+    planText   = data.plan;
 
   } catch (err) {
-    // Fallback to mock if API unavailable
     console.warn('API недоступен, используем mock:', err.message);
     masterText = pick(mockMaster, context);
     battleText = pick(mockBattle, context);
     codeText   = pick(mockCode,   context);
+    planText   = null;
   }
 
   stopLoadingAnimation();
@@ -476,6 +480,23 @@ async function runTransform() {
   showCard('card1', masterText, 0);
   showCard('card2', battleText, 200);
   showCard('card3', codeText,   400);
+
+  // Show plan block
+  const planBlock = document.getElementById('plan-block');
+  const planBody  = document.getElementById('plan-body');
+  if (planText && planBlock && planBody) {
+    planBody.textContent = '';
+    planBlock.style.display = 'none';
+    setTimeout(() => {
+      typewrite(planBody, planText, 18);
+      planBlock.style.display = '';
+      planBlock.style.opacity = '0';
+      planBlock.style.transition = 'opacity 0.5s';
+      setTimeout(() => { planBlock.style.opacity = '1'; }, 50);
+    }, 700);
+  } else if (planBlock) {
+    planBlock.style.display = 'none';
+  }
 
   // Show post CTAs + feedback after cards appear
   setTimeout(() => {
