@@ -17,9 +17,9 @@
   --red-dim:     rgba(255,64,64,0.10);
   --gold:        #FFD166;
   --gold-dim:    rgba(255,209,102,0.10);
-  --text:        #F4F4FC;
-  --text-dim:    #C0C0DC;
-  --text-mute:   #7070A0;
+  --text:        #F8F8FF;
+  --text-dim:    #D8D8F2;
+  --text-mute:   #A0A0C8;
   --border:      rgba(184,255,0,0.10);
   --border-mid:  rgba(184,255,0,0.28);
 }
@@ -94,7 +94,7 @@ body::before {
   box-shadow: 0 4px 40px rgba(0,0,0,0.4);
 }
 .nav-link {
-  font-size: 10px; letter-spacing: 0.2em;
+  font-size: 12px; letter-spacing: 0.15em;
   text-transform: uppercase; color: var(--text-dim);
   text-decoration: none;
   transition: color 0.2s;
@@ -220,9 +220,9 @@ body::before {
 /* ── Field label ────────────────────────────────────────── */
 .field-label {
   display: flex; align-items: center; gap: 8px;
-  font-size: 13px; letter-spacing: 0.1em;
+  font-size: 15px; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--text-dim);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .field-label .lnum { color: var(--energy); font-weight: 500; }
 
@@ -233,7 +233,7 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 3px; color: var(--text);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px; line-height: 1.65;
+  font-size: 15px; line-height: 1.65;
   padding: 13px 16px; outline: none;
   transition: border-color 0.25s, box-shadow 0.25s;
   caret-color: var(--energy);
@@ -287,8 +287,8 @@ input[type=range]::-moz-range-thumb {
 }
 .slider-labels {
   display: flex; justify-content: space-between;
-  font-size: 9px; color: var(--text-mute);
-  letter-spacing: 0.1em; margin-top: 6px;
+  font-size: 12px; color: var(--text-dim);
+  letter-spacing: 0.06em; margin-top: 8px;
 }
 
 /* ── CTA Button ─────────────────────────────────────────── */
@@ -373,7 +373,7 @@ input[type=range]::-moz-range-thumb {
 }
 .card-body {
   font-family: 'Inter', sans-serif;
-  font-size: 14px; line-height: 1.85;
+  font-size: 16px; line-height: 1.85;
   color: var(--text); margin-top: 14px;
   min-height: 40px;
 }
@@ -401,13 +401,13 @@ input[type=range]::-moz-range-thumb {
   margin-bottom: 12px;
 }
 .belief-tag {
-  padding: 5px 12px;
+  padding: 7px 13px;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-mid);
   border-radius: 2px;
   color: var(--text-dim);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.06em;
+  font-size: 12px; letter-spacing: 0.04em;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
   text-align: left;
@@ -420,11 +420,11 @@ input[type=range]::-moz-range-thumb {
 
 /* ── Slider zone ────────────────────────────────────────── */
 .slider-zone {
-  font-size: 10px; letter-spacing: 0.12em;
+  font-size: 13px; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--energy);
-  margin-top: 10px; min-height: 14px;
+  margin-top: 10px; min-height: 16px;
   transition: opacity 0.3s;
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 /* ── Loading text ───────────────────────────────────────── */
@@ -479,7 +479,7 @@ input[type=range]::-moz-range-thumb {
 
 /* ── Section headings ───────────────────────────────────── */
 .section-label {
-  font-size: 12px; letter-spacing: 0.18em;
+  font-size: 14px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--text-dim);
 }
 .section-title {
@@ -510,7 +510,7 @@ input[type=range]::-moz-range-thumb {
   font-size: 13px; font-weight: 700;
   letter-spacing: 0.04em; margin-bottom: 10px;
 }
-.how-body { font-size: 13px; line-height: 1.75; color: var(--text); }
+.how-body { font-size: 15px; line-height: 1.75; color: var(--text); }
 
 /* ── Contact form ───────────────────────────────────────── */
 .contact-card {
