@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Money Flip — Лаборатория трансформации</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            syne: ['Syne', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syne:wght@700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="min-h-screen">
+
+  <!-- Decorative bg elements -->
+  <div class="glow-blob glow-blob-1"></div>
+  <div class="glow-blob glow-blob-2"></div>
+  <div class="glow-blob glow-blob-3"></div>
+  <div class="scanlines"></div>
+
+  <!-- ═══ MOBILE MENU ════════════════════════════════════════ -->
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#tool"    onclick="closeMobileMenu()">Инструмент</a>
+    <a href="#how"     onclick="closeMobileMenu()">Методология</a>
+    <a href="#contact" onclick="closeMobileMenu()">Контакт</a>
+    <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mute);margin-top:1rem">
+      ⚡ The Money Flip v1.0
+    </div>
+  </div>
+
+  <!-- ═══ HEADER ═════════════════════════════════════════════ -->
+  <header class="site-header z-content">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#" style="text-decoration:none;display:flex;align-items:center;gap:8px">
+        <span style="color:var(--energy);font-size:18px">⚡</span>
+        <span class="font-syne font-bold tracking-widest" style="font-size:13px;color:var(--text);letter-spacing:0.15em">
+          THE MONEY FLIP
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#tool"    class="nav-link">Инструмент</a>
+        <a href="#how"     class="nav-link">Методология</a>
+        <a href="#contact" class="nav-link">Контакт</a>
+      </nav>
+
+      <!-- Hamburger (mobile) -->
+      <button class="hamburger md:hidden" id="hamburger"
+        onclick="toggleMobileMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ════════════════════════════════════════════════ -->
+  <main class="z-content pt-20">
+
+    <!-- ── HERO ────────────────────────────────────────────── -->
+    <section class="max-w-4xl mx-auto px-6 pt-16 pb-10 text-center">
+
+      <div class="lab-badge mb-6 fade-in" style="display:inline-flex">
+        Нейро-лаборатория v1.0
+      </div>
+
+      <h1 class="hero-title mb-5 fade-in fade-in-1">
+        Одно убеждение держит вас<br>
+        на прежнем уровне дохода.<br>
+        <span class="accent">Давайте его заменим.</span>
+      </h1>
+
+      <p class="fade-in fade-in-2" style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);line-height:1.9">
+        НЛП + Claude AI&nbsp;&nbsp;·&nbsp;&nbsp;Три стиля воздействия&nbsp;&nbsp;·&nbsp;&nbsp;Русский язык
+      </p>
+
+      <div class="flex justify-center gap-4 mt-8 flex-wrap fade-in fade-in-3">
+        <a href="#tool" class="btn-cta" style="width:auto;padding:14px 32px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:13px">
+          <span>⚡</span> Попробовать бесплатно
+        </a>
+        <a href="#how" class="btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+          Как работает ↓
+        </a>
+      </div>
+
+      <div class="scan-line mt-10 fade-in fade-in-4"></div>
+    </section>
+
+    <!-- ── STATS ────────────────────────────────────────────── -->
+    <section id="stats" class="max-w-3xl mx-auto px-6 pb-16">
+      <div class="grid grid-cols-3 gap-6 text-center">
+        <div>
+          <div class="stat-num" data-target="1200">0</div>
+          <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-top:6px">
+            трансформаций
+          </div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="3">0</div>
+          <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-top:6px">
+            стиля воздействия
+          </div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="4">0</div>
+          <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-top:6px">
+            контекста
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TOOL ─────────────────────────────────────────────── -->
+    <section id="tool" class="max-w-2xl mx-auto px-6 pb-20">
+
+      <!-- Form card -->
+      <div class="form-card" style="padding:36px">
+
+        <!-- Field 01: Belief -->
+        <div style="margin-bottom:24px">
+          <div class="field-label">
+            <span class="lnum">01</span>
+            Какая мысль о деньгах возвращается снова и снова?
+          </div>
+          <!-- Clickable belief tags -->
+          <div class="belief-tags" id="belief-tags">
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">Деньги достаются только тяжёлым трудом</button>
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">Я не заслуживаю большого дохода</button>
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">Богатые люди — нечестные</button>
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">У нас в семье никогда не было денег</button>
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">Я не умею обращаться с деньгами</button>
+            <button type="button" class="belief-tag" onclick="fillBelief(this)">Просить деньги — это стыдно</button>
+          </div>
+          <textarea id="belief" class="field-input" style="min-height:110px;resize:vertical"
+            placeholder="Например: «Деньги достаются только тяжёлым трудом»&#10;или «Я не заслуживаю большого дохода»"></textarea>
+        </div>
+
+        <!-- Field 02: Context -->
+        <div style="margin-bottom:24px">
+          <div class="field-label">
+            <span class="lnum">02</span>
+            В какой сфере это мешает больше всего?
+          </div>
+          <div class="select-wrap">
+            <select id="context" class="field-input" style="cursor:pointer;padding-right:40px;-webkit-appearance:none;appearance:none">
+              <option value="">— Выберите контекст —</option>
+              <option value="work">💼 Карьера / Работа</option>
+              <option value="business">🚀 Бизнес / Предпринимательство</option>
+              <option value="family">🏠 Семья / Отношения с деньгами</option>
+              <option value="personal">🎯 Личные финансы / Инвестиции</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Field 03: Intensity -->
+        <div style="margin-bottom:32px">
+          <div class="field-label" style="justify-content:space-between">
+            <span style="display:flex;align-items:center;gap:8px">
+              <span class="lnum">03</span>
+              Насколько сильно это влияет на твою жизнь?
+            </span>
+            <span id="slider-val" class="font-syne font-bold"
+              style="font-size:22px;color:var(--energy);text-shadow:0 0 16px rgba(184,255,0,0.6);min-width:24px;text-align:right">
+              5
+            </span>
+          </div>
+          <input type="range" id="intensity" min="1" max="10" value="5">
+          <div class="slider-labels">
+            <span>1 · Замечаю, не мешает</span>
+            <span>10 · Живу с этим всю жизнь</span>
+          </div>
+          <div class="slider-zone" id="slider-zone"></div>
+        </div>
+
+        <!-- CTA Button -->
+        <button class="btn-cta" id="transform-btn" onclick="runTransform()">
+          <div style="display:flex;align-items:center;justify-content:center;gap:10px;position:relative;z-index:1">
+            <span class="btn-icon" style="font-size:18px;transition:transform 0.4s">⚡</span>
+            <span class="btn-text">Запустить поток трансформации</span>
+            <span class="loader-text"></span>
+          </div>
+        </button>
+
+        <!-- Hint -->
+        <p style="text-align:center;font-size:9px;letter-spacing:0.14em;color:var(--text-mute);margin-top:12px;text-transform:uppercase">
+          Ctrl + Enter для запуска
+        </p>
+      </div>
+
+      <!-- Results divider -->
+      <div class="results-header" id="results-header" style="margin-top:40px;margin-bottom:12px">
+        <div class="rh-line" style="background:linear-gradient(90deg,transparent,rgba(184,255,0,0.3))"></div>
+        <span class="rh-label">Результат трансформации</span>
+        <div class="rh-line" style="background:linear-gradient(90deg,rgba(184,255,0,0.3),transparent)"></div>
+      </div>
+      <div class="belief-echo" id="belief-echo" style="display:none;margin-bottom:20px">
+        Работаем с убеждением: <span id="belief-echo-text"></span>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" id="empty-state">
+        <div style="font-size:28px">◈</div>
+        <div class="empty-state-text">Опиши убеждение — получишь три взгляда на него</div>
+        <div style="font-size:10px;letter-spacing:0.12em;color:var(--text-mute);text-transform:uppercase;margin-top:4px">
+          ◎ Мастер · ⌬ Вызов · ◇ Код
+        </div>
+      </div>
+
+      <!-- ═ Result cards ═ -->
+      <div class="results-grid" id="results-grid">
+
+        <!-- Card 1: Ракурс Мастера (cyan) -->
+        <div class="result-card card-master" id="card1" style="display:none">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <div class="card-icon-wrap">◎</div>
+              <div>
+                <div class="card-tag">Ракурс Мастера</div>
+                <div class="card-subtag">Расширение трубы</div>
+              </div>
+            </div>
+            <button class="card-copy-btn" onclick="copyCard('card1-body', this)" title="Скопировать">📋</button>
+          </div>
+          <div class="card-body" id="card1-body"></div>
+        </div>
+
+        <!-- Card 2: Тест на прочность (red) -->
+        <div class="result-card card-battle" id="card2" style="display:none">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <div class="card-icon-wrap">⌬</div>
+              <div>
+                <div class="card-tag">Тест на прочность</div>
+                <div class="card-subtag">Промывка фильтров</div>
+              </div>
+            </div>
+            <button class="card-copy-btn" onclick="copyCard('card2-body', this)" title="Скопировать">📋</button>
+          </div>
+          <div class="card-body" id="card2-body"></div>
+        </div>
+
+        <!-- Card 3: Код Новой Реальности (gold) -->
+        <div class="result-card card-code" id="card3" style="display:none">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <div class="card-icon-wrap">◇</div>
+              <div>
+                <div class="card-tag">Код Новой Реальности</div>
+                <div class="card-subtag">Чистый ток</div>
+              </div>
+            </div>
+            <button class="card-copy-btn" onclick="copyCard('card3-body', this)" title="Скопировать">📋</button>
+          </div>
+          <div class="card-body" id="card3-body"></div>
+        </div>
+
+      </div><!-- /results-grid -->
+
+      <!-- Post-result CTAs -->
+      <div id="post-ctas" style="display:none;margin-top:24px;flex-wrap:wrap;gap:12px;justify-content:center">
+        <button class="btn-ghost" onclick="copyBest(this)">📋 Скопировать Код реальности</button>
+        <a href="https://t.me/" class="btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" target="_blank" rel="noopener">✈ Получить практику в Telegram</a>
+        <button class="btn-ghost" onclick="resetForm()">⚡ Разобрать ещё одно</button>
+      </div>
+
+    </section>
+
+    <!-- ── HOW IT WORKS ─────────────────────────────────────── -->
+    <section id="how" class="max-w-4xl mx-auto px-6 pb-24">
+
+      <div class="text-center" style="margin-bottom:48px">
+        <div class="section-label" style="margin-bottom:12px">Методология</div>
+        <h2 class="section-title">
+          Не аффирмации 90-х.<br>
+          <span class="accent-energy">Технология НЛП + ИИ.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div class="how-card">
+          <div class="how-num" style="color:var(--cyan)">01</div>
+          <div class="how-title" style="color:var(--cyan)">Диагностика</div>
+          <p class="how-body">
+            Описываете убеждение и его глубину. Алгоритм определяет стратегию:
+            смелый прыжок, мостовой шаг или техника признания.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <div class="how-num" style="color:var(--red-hot)">02</div>
+          <div class="how-title" style="color:var(--red-hot)">3 удара по убеждению</div>
+          <p class="how-body">
+            Три разных стиля воздействия по методологии Пелехатого и Спирицы:
+            мягкое расширение · боевой вызов · генеративная формула.
+          </p>
+        </div>
+
+        <div class="how-card">
+          <div class="how-num" style="color:var(--gold)">03</div>
+          <div class="how-title" style="color:var(--gold)">Код и действие</div>
+          <p class="how-body">
+            Получаете новую формулировку, противоречие и одно конкретное действие.
+            Не «станьте богатым». А «сделайте это сегодня».
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Methodology legend -->
+      <div style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <div style="background:rgba(0,200,255,0.05);border:1px solid rgba(0,200,255,0.15);border-radius:3px;padding:16px 20px">
+          <div style="color:var(--cyan);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:6px">◎ Ракурс Мастера</div>
+          <div style="color:var(--text-dim);font-size:11px;line-height:1.6">Переопределение + Намерение. Мастер не спорит — он показывает, что реальность шире.</div>
+        </div>
+        <div style="background:rgba(255,64,64,0.05);border:1px solid rgba(255,64,64,0.15);border-radius:3px;padding:16px 20px">
+          <div style="color:var(--red-hot);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:6px">⌬ Тест на прочность</div>
+          <div style="color:var(--text-dim);font-size:11px;line-height:1.6">Применение к себе + Противоположный пример. Убираем мусор, который забивает систему.</div>
+        </div>
+        <div style="background:rgba(255,209,102,0.05);border:1px solid rgba(255,209,102,0.15);border-radius:3px;padding:16px 20px">
+          <div style="color:var(--gold);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:6px">◇ Код Новой Реальности</div>
+          <div style="color:var(--text-dim);font-size:11px;line-height:1.6">Иерархия критериев + Изменение фрейма. Энергия направлена в конкретное русло.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── CONTACT ──────────────────────────────────────────── -->
+    <section id="contact" class="max-w-xl mx-auto px-6 pb-28">
+
+      <div class="text-center" style="margin-bottom:40px">
+        <div class="section-label" style="margin-bottom:12px">Контакт</div>
+        <h2 class="section-title">Обсудим ваш проект?</h2>
+        <p style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);margin-top:10px">
+          Первый разговор — бесплатно · Отвечу в течение 24 часов
+        </p>
+      </div>
+
+      <div class="contact-card" style="padding:36px">
+
+        <form id="contact-form" onsubmit="submitContact(event)">
+          <div style="margin-bottom:20px">
+            <div class="field-label">Имя</div>
+            <input type="text" id="c-name" class="field-input" placeholder="Ваше имя" required>
+          </div>
+          <div style="margin-bottom:20px">
+            <div class="field-label">Email</div>
+            <input type="email" id="c-email" class="field-input" placeholder="your@email.com" required>
+          </div>
+          <div style="margin-bottom:28px">
+            <div class="field-label">Сообщение</div>
+            <textarea id="c-message" class="field-input" style="min-height:96px;resize:none"
+              placeholder="Опишите задачу — сайт, приложение, ИИ-агент..." required></textarea>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <button type="submit" class="btn-send">→ Отправить</button>
+            <span style="font-size:10px;letter-spacing:0.12em;color:var(--text-mute)">Без спама</span>
+          </div>
+        </form>
+
+        <div class="success-msg" id="success-msg">
+          <span style="color:var(--energy);font-size:22px;line-height:1">✓</span>
+          <span>Сообщение отправлено! Отвечу в течение 24 часов.</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════════════ -->
+  <footer class="z-content text-center" style="padding:28px 24px">
+    <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-mute)">
+      ⚡ The Money Flip · Лаборатория трансформации · © 2026
+    </p>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" onclick="scrollToTop()" title="Наверх" aria-label="Наверх">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
