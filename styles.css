@@ -17,9 +17,9 @@
   --red-dim:     rgba(255,64,64,0.10);
   --gold:        #FFD166;
   --gold-dim:    rgba(255,209,102,0.10);
-  --text:        #F0F0FA;
-  --text-dim:    #8888A8;
-  --text-mute:   #4A4A68;
+  --text:        #F4F4FC;
+  --text-dim:    #C0C0DC;
+  --text-mute:   #7070A0;
   --border:      rgba(184,255,0,0.10);
   --border-mid:  rgba(184,255,0,0.28);
 }
@@ -220,7 +220,7 @@ body::before {
 /* ── Field label ────────────────────────────────────────── */
 .field-label {
   display: flex; align-items: center; gap: 8px;
-  font-size: 10px; letter-spacing: 0.2em;
+  font-size: 13px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--text-dim);
   margin-bottom: 8px;
 }
@@ -479,7 +479,7 @@ input[type=range]::-moz-range-thumb {
 
 /* ── Section headings ───────────────────────────────────── */
 .section-label {
-  font-size: 10px; letter-spacing: 0.22em;
+  font-size: 12px; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--text-dim);
 }
 .section-title {
@@ -576,7 +576,7 @@ input[type=range]::-moz-range-thumb {
 }
 .results-header.visible { opacity: 1; }
 .rh-line { flex: 1; height: 1px; }
-.rh-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); }
+.rh-label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
 
 /* ── Nav history button ─────────────────────────────────── */
 .nav-history-btn {
