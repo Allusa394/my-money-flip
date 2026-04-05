@@ -156,11 +156,6 @@ function saveFeedback() {
   updateHistoryBadge();
 }
 
-/* ── Belief tag click ───────────────────────────────────── */
-function fillBelief(tagBtn) {
-  document.getElementById('belief').value = tagBtn.textContent;
-  document.getElementById('belief').focus();
-}
 
 /* ── Slider ─────────────────────────────────────────────── */
 const slider    = document.getElementById('intensity');
