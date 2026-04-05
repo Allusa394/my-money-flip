@@ -3,6 +3,16 @@
 
 ---
 
+## Ссылки проекта
+
+| | |
+|---|---|
+| 🌐 Сайт (production) | https://money-flip.vercel.app |
+| 🐙 GitHub | https://github.com/Allusa394/my-money-flip |
+| ⚙️ Vercel Dashboard | https://vercel.com/alusa5263-3341s-projects/money-flip |
+
+---
+
 ## Что это за проект
 
 **The Money Flip** — интерактивный трансформационный сервис для работы с ограничивающими убеждениями о деньгах через НЛП + Claude AI.
@@ -22,6 +32,10 @@ my-money flip/
 ├── index.html              — главная страница (весь UI)
 ├── styles.css              — дизайн-система (CSS custom properties)
 ├── script.js               — вся логика (mock данные, анимации, форма)
+├── api/
+│   └── transform.js        — Vercel serverless function → OpenRouter API
+├── .env.local              — API ключи (не в git)
+├── .gitignore              — игнорирует .env.local и .vercel
 ├── CLAUDE.md               — этот файл
 ├── brief.md                — главный документ проекта (ТЗ v1.1)
 ├── research.md             — исследование (7 частей, включая критику)

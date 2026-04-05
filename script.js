@@ -30,6 +30,132 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ── History state ──────────────────────────────────────── */
+let currentEntryId = null;
+let selectedRating  = null;
+
+const CTX_LABELS = { work: 'Карьера', business: 'Бизнес', family: 'Семья', personal: 'Финансы' };
+const RATING_EMOJI = { 1: '😫', 2: '😕', 3: '😐', 4: '🙂', 5: '🚀' };
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+/* ── History nav button badge ───────────────────────────── */
+function updateHistoryBadge() {
+  const btn = document.getElementById('nav-history-btn');
+  if (!btn) return;
+  const count = getAllTransformations().length;
+  btn.classList.toggle('has-records', count > 0);
+  btn.textContent = count > 0 ? `⏱ История (${count})` : '⏱ История';
+}
+
+/* ── History modal ──────────────────────────────────────── */
+function openHistory() {
+  renderHistoryList();
+  const modal = document.getElementById('history-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeHistory() {
+  document.getElementById('history-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function closeHistoryOutside(e) {
+  if (e.target === document.getElementById('history-modal')) closeHistory();
+}
+
+function renderHistoryList() {
+  const list = document.getElementById('history-list');
+  const all  = getAllTransformations().slice().reverse();
+
+  if (!all.length) {
+    list.innerHTML = '<div class="history-empty">Пока пусто —<br>запусти первую трансформацию</div>';
+    return;
+  }
+
+  list.innerHTML = all.map(entry => {
+    const ratingEl = entry.feedback.rating
+      ? `<span class="history-rating">${RATING_EMOJI[entry.feedback.rating]}</span>` : '';
+    const belief = entry.belief.length > 55
+      ? '«' + entry.belief.slice(0, 55) + '…»' : '«' + entry.belief + '»';
+    return `
+      <div class="history-entry" onclick="loadArchive('${entry.id}')">
+        <div class="history-entry-top">
+          <span class="history-date">${formatDate(entry.date)}</span>
+          <span class="ctx-badge ctx-${entry.context}">${CTX_LABELS[entry.context] || entry.context}</span>
+          ${ratingEl}
+        </div>
+        <div class="history-belief">${belief}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── Load archived result ───────────────────────────────── */
+function loadArchive(id) {
+  const entry = getTransformationById(id);
+  if (!entry) return;
+  closeHistory();
+
+  // Show archive banner
+  const banner = document.getElementById('archive-banner');
+  banner.textContent = `📂 Архивная запись · ${formatDate(entry.date)}`;
+  banner.style.display = '';
+
+  // Belief echo
+  document.getElementById('belief-echo-text').textContent = '«' + entry.belief + '»';
+  document.getElementById('belief-echo').style.display = '';
+
+  // Results
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('results-header').classList.add('visible');
+
+  ['card1','card2','card3'].forEach(cid => {
+    const c = document.getElementById(cid);
+    c.style.display = '';
+    c.classList.add('visible');
+  });
+  document.getElementById('card1-body').textContent = entry.results.master;
+  document.getElementById('card2-body').textContent = entry.results.battle;
+  document.getElementById('card3-body').textContent = entry.results.code;
+
+  // Hide feedback block for archive
+  document.getElementById('feedback-block').style.display = 'none';
+
+  // Show post-ctas
+  const ctas = document.getElementById('post-ctas');
+  ctas.style.display = 'flex';
+  ctas.style.opacity = '1';
+
+  setTimeout(() => {
+    document.getElementById('card1').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 300);
+}
+
+/* ── Feedback ───────────────────────────────────────────── */
+function selectRating(n) {
+  selectedRating = n;
+  document.querySelectorAll('.emoji-btn').forEach(b => {
+    b.classList.toggle('selected', parseInt(b.dataset.r) === n);
+  });
+}
+
+function saveFeedback() {
+  if (!currentEntryId) return;
+  const comment = document.getElementById('feedback-comment').value.trim();
+  updateFeedback(currentEntryId, selectedRating, comment);
+
+  // Lock UI
+  document.querySelectorAll('.emoji-btn').forEach(b => b.disabled = true);
+  document.getElementById('feedback-comment').disabled = true;
+  document.querySelector('.btn-save-feedback').style.display = 'none';
+  document.getElementById('feedback-saved').style.display = 'block';
+
+  updateHistoryBadge();
+}
+
 /* ── Belief tag click ───────────────────────────────────── */
 function fillBelief(tagBtn) {
   document.getElementById('belief').value = tagBtn.textContent;
@@ -229,8 +355,11 @@ function resetForm() {
   });
   document.getElementById('results-header').classList.remove('visible');
   document.getElementById('belief-echo').style.display = 'none';
+  document.getElementById('archive-banner').style.display = 'none';
+  document.getElementById('feedback-block').style.display = 'none';
   document.getElementById('empty-state').style.display = '';
   document.getElementById('post-ctas').style.display = 'none';
+  currentEntryId = null;
   document.getElementById('belief').value = '';
   document.getElementById('context').value = '';
   slider.value = 5; updateSlider();
@@ -326,24 +455,44 @@ async function runTransform() {
   stopLoadingAnimation();
   btn.classList.remove('loading');
 
+  // Save to history
+  currentEntryId = saveTransformation(belief, context, slider.value, {
+    master: masterText, battle: battleText, code: codeText
+  });
+  updateHistoryBadge();
+
+  // Reset feedback block
+  selectedRating = null;
+  document.querySelectorAll('.emoji-btn').forEach(b => { b.classList.remove('selected'); b.disabled = false; });
+  document.getElementById('feedback-comment').value = '';
+  document.getElementById('feedback-comment').disabled = false;
+  document.querySelector('.btn-save-feedback').style.display = '';
+  document.getElementById('feedback-saved').style.display = 'none';
+  document.getElementById('feedback-block').style.display = 'none';
+
+  // Hide archive banner
+  document.getElementById('archive-banner').style.display = 'none';
+
   // Show belief echo
-  const echoEl = document.getElementById('belief-echo');
   document.getElementById('belief-echo-text').textContent = '«' + belief + '»';
-  echoEl.style.display = '';
+  document.getElementById('belief-echo').style.display = '';
 
   // Show 3 cards with stagger
   showCard('card1', masterText, 0);
   showCard('card2', battleText, 200);
   showCard('card3', codeText,   400);
 
-  // Show post CTAs after cards appear
+  // Show post CTAs + feedback after cards appear
   setTimeout(() => {
     const ctas = document.getElementById('post-ctas');
     ctas.style.display = 'flex';
     ctas.style.opacity = '0';
     ctas.style.transition = 'opacity 0.4s';
     setTimeout(() => { ctas.style.opacity = '1'; }, 50);
-  }, 1200);
+
+    // Show feedback block
+    document.getElementById('feedback-block').style.display = '';
+  }, 1400);
 
   // Scroll to results
   setTimeout(() => {
@@ -382,3 +531,6 @@ document.querySelectorAll('.how-card, .contact-card').forEach(el => {
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   sectionObserver.observe(el);
 });
+
+/* ── Init ───────────────────────────────────────────────── */
+updateHistoryBadge();

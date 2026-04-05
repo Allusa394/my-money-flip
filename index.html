@@ -37,11 +37,31 @@
   <div class="glow-blob glow-blob-3"></div>
   <div class="scanlines"></div>
 
+  <!-- ═══ HISTORY MODAL ══════════════════════════════════════ -->
+  <div id="history-modal" class="history-modal" style="display:none" onclick="closeHistoryOutside(event)">
+    <div class="history-panel">
+
+      <div class="history-panel-header">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="color:var(--energy)">⏱</span>
+          <span class="font-syne" style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase">Лог трансформаций</span>
+        </div>
+        <button class="history-close" onclick="closeHistory()">✕</button>
+      </div>
+
+      <div id="history-list" class="history-list">
+        <!-- рендерится в JS -->
+      </div>
+
+    </div>
+  </div>
+
   <!-- ═══ MOBILE MENU ════════════════════════════════════════ -->
   <div id="mobile-menu" class="mobile-menu">
     <a href="#tool"    onclick="closeMobileMenu()">Инструмент</a>
     <a href="#how"     onclick="closeMobileMenu()">Методология</a>
     <a href="#contact" onclick="closeMobileMenu()">Контакт</a>
+    <a href="#" onclick="openHistory();closeMobileMenu();return false">⏱ История</a>
     <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mute);margin-top:1rem">
       ⚡ The Money Flip v1.0
     </div>
@@ -64,6 +84,7 @@
         <a href="#tool"    class="nav-link">Инструмент</a>
         <a href="#how"     class="nav-link">Методология</a>
         <a href="#contact" class="nav-link">Контакт</a>
+        <button class="nav-history-btn" onclick="openHistory()" id="nav-history-btn">⏱ История</button>
       </nav>
 
       <!-- Hamburger (mobile) -->
@@ -213,6 +234,7 @@
         <span class="rh-label">Результат трансформации</span>
         <div class="rh-line" style="background:linear-gradient(90deg,rgba(184,255,0,0.3),transparent)"></div>
       </div>
+      <div id="archive-banner" class="archive-banner" style="display:none"></div>
       <div class="belief-echo" id="belief-echo" style="display:none;margin-bottom:20px">
         Работаем с убеждением: <span id="belief-echo-text"></span>
       </div>
@@ -275,6 +297,27 @@
         </div>
 
       </div><!-- /results-grid -->
+
+      <!-- Feedback block -->
+      <div id="feedback-block" style="display:none;margin-top:20px">
+        <div class="feedback-card">
+          <div class="feedback-title">Насколько это отозвалось?</div>
+          <div class="feedback-emojis" id="feedback-emojis">
+            <button class="emoji-btn" onclick="selectRating(1)" data-r="1">😫</button>
+            <button class="emoji-btn" onclick="selectRating(2)" data-r="2">😕</button>
+            <button class="emoji-btn" onclick="selectRating(3)" data-r="3">😐</button>
+            <button class="emoji-btn" onclick="selectRating(4)" data-r="4">🙂</button>
+            <button class="emoji-btn" onclick="selectRating(5)" data-r="5">🚀</button>
+          </div>
+          <textarea id="feedback-comment" class="field-input"
+            style="min-height:70px;resize:none;margin-top:14px;font-size:12px"
+            placeholder="Заметка для себя... (необязательно)"></textarea>
+          <div style="display:flex;justify-content:flex-end;margin-top:12px">
+            <button class="btn-save-feedback" onclick="saveFeedback()">Сохранить опыт</button>
+          </div>
+          <div id="feedback-saved" class="feedback-saved" style="display:none">Опыт сохранён ✓</div>
+        </div>
+      </div>
 
       <!-- Post-result CTAs -->
       <div id="post-ctas" style="display:none;margin-top:24px;flex-wrap:wrap;gap:12px;justify-content:center">
@@ -398,6 +441,7 @@
   <!-- BACK TO TOP -->
   <button id="back-to-top" onclick="scrollToTop()" title="Наверх" aria-label="Наверх">↑</button>
 
+  <script src="history.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
