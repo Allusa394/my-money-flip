@@ -160,9 +160,9 @@ body::before {
 /* ── Hero ───────────────────────────────────────────────── */
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(28px, 5.5vw, 58px);
-  font-weight: 800; line-height: 1.08;
-  letter-spacing: -0.025em; color: var(--text);
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 800; line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--text);
 }
 .hero-title .accent {
   color: var(--energy);
@@ -373,7 +373,7 @@ input[type=range]::-moz-range-thumb {
 }
 .card-body {
   font-family: 'Inter', sans-serif;
-  font-size: 13px; line-height: 1.8;
+  font-size: 14px; line-height: 1.85;
   color: var(--text); margin-top: 14px;
   min-height: 40px;
 }
@@ -510,7 +510,7 @@ input[type=range]::-moz-range-thumb {
   font-size: 13px; font-weight: 700;
   letter-spacing: 0.04em; margin-bottom: 10px;
 }
-.how-body { font-size: 12px; line-height: 1.7; color: var(--text); }
+.how-body { font-size: 13px; line-height: 1.75; color: var(--text); }
 
 /* ── Contact form ───────────────────────────────────────── */
 .contact-card {
